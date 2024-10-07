@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sensor Data</title>
+</head>
+<body>
+    <h1>Real-time Sensor Data</h1>
+    <table border="1" id="sensorTable">
+        <tr>
+            <th>Bend ID</th>
+            <th>Sensor ID</th>
+            <th>Sensor Value</th>
+            <th>Timestamp</th>
+        </tr>
+    </table>
+
+    <script>
+        function fetchSensorData() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "fetch_data.php", true);
+            xhr.onload = function() {
+                if (this.status === 200) {
+                    document.getElementById('sensorTable').innerHTML = this.responseText;
+                }
+            };
+            xhr.send();
+        }
+
+        // Fetch data every 5 seconds
+        setInterval(fetchSensorData, 5000);
+    </script>
+</body>
+</html>
